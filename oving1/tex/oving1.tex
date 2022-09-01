@@ -12,7 +12,7 @@
 \usepackage{enumitem}
 
 \usepackage[scr]{rsfso}
-\newcommand{\Laplace}{\mathscr{L}}
+\newcommand{\Laplace}{\mathcal{L}}
 
 \begin{document}
 
@@ -42,10 +42,11 @@ From the graph we can obtain the following equation for $f$;
 \end{align*}
 \begin{align*}
 	\Laplace\{f\}(s) 
-	&= \Laplace\{t [H(t) - H(t-1)]\} + \Laplace\{H(t-1) - H(t-2)\} \\
-	&= \Laplace\{tH(t)\} - \Laplace\{tH(t-1)\} + \Laplace\{H(t-1)\} - \Laplace\{H(t-2)\} \\
-	&= \frac{1}{s^2} - \frac{}{} + \frac{e^{-s}}{s} - \frac{e^{-2s}}{s}
-	% Mangler et ledd^^^
+	&= \Laplace\{t [u(t) - u(t-1)]\} + \Laplace\{u(t-1) - u(t-2)\} \\
+	&= \Laplace\{tu(t)\} - \Laplace\{tu(t-1)\} + \Laplace\{u(t-1)\} - \Laplace\{u(t-2)\} \\
+	&= \frac{1}{s^2} - \Laplace\{[(t-1)+1]u(t-1)\} + \frac{e^{-s}}{s} - \frac{e^{-2s}}{s} \\
+	&= \frac{1}{s^2} - \frac{e^{-s}}{s} - \frac{e^{-s}}{s^2} + \frac{e^{-s}}{s} - \frac{e^{-2s}}{s} \\
+	&= \frac{1}{s^2} - \frac{e^{-s}}{s^2} - \frac{e^{-2s}}{s}
 \end{align*}
 
 \section*{6.1.23}
@@ -71,9 +72,9 @@ Using $\Laplace\{\cos bt\}(s) = \frac{s}{s^2 + b}$ we get
 	= \frac{A}{s+5} + \frac{B}{s-5}
 	\rightarrow \frac{12}{5(s+5)} + \frac{13}{5(s-5)} \\
 	\Laplace^{-1}\{F(s)\}(t) 
-	&= \Laplace^{-1}\left\{\frac{12}{5(s+5)}\right\} + \Laplace^{-1}\left\{\frac{13}{5(s+5)}\right\} \\
+	&= \Laplace^{-1}\left\{\frac{12}{5(s+5)}\right\} + \Laplace^{-1}\left\{\frac{13}{5(s-5)}\right\} \\
 	&= \frac{12}{5} e^{-5t} + \frac{13}{5} e^{5t} \\
-	&= \frac{1}{5} (12e^{-5t} + 12e^{5t})
+	&= \frac{1}{5} (12e^{-5t} + 13e^{5t})
 \end{align*}
 
 \section*{6.1.36}
@@ -102,16 +103,15 @@ Using $\Laplace\{\cos bt\}(s) = \frac{s}{s^2 + b}$ we get
 	= e^{3t} - e^{-t}
 \end{align*}
 
-\newpage
-
 \section*{6.2.4}
-I wrote down the wrong values from the book so I will be solving the IVP $y'' + y' = 10e^{-t}$ with $y(0) = 0 = y'(0)$. \\
+I wrote down the wrong values from the book so I will be solving the IVP $y'' + \underline{y'} = 10e^{-t}$ with $y(0) = 0 = y'(0)$. \\
 \begin{itemize}[leftmargin=4.0cm,labelsep=0.5cm]
 \item[$\Laplace$ - transform:]
 	$\Laplace\{y''+y'\} = \Laplace\{10e^{-t}\}
 	\rightarrow s^2 Y + sY = \frac{10}{s+1}$
 \item[Solve for $Y$:]
-	$Y = \frac{10}{s(s+1)^2}$
+	$Y = \frac{10}{s(s+1)^2}
+	= \frac{A}{s} + \frac{B}{s+1} + \frac{C}{(s+1)^2}$
 \item[Write as partial fraction:]
 	$(A+C)s^2 + (A+B+2C)s + C = 10 \\
 	\rightarrow A=-10,\ B=-10,\ C = 10 \\
@@ -144,7 +144,7 @@ To solve this IVP, we introduce the variable $t_1 = t + 1$ such that $y_1(t_1) =
 \item[Control:]
 	$y(-1) = 4e^0 = 4 \\
 	y' = 24e^{6t+6} \\
-	\rightarrow y'' - 6y = 24e^{6t+6} - 24e^{6t+6} = 0 
+	\rightarrow y' - 6y = 24e^{6t+6} - 24e^{6t+6} = 0 
 	\hspace*{0.5cm} \text{Ok.}$
 \end{itemize}
 
@@ -160,7 +160,7 @@ The function
 \end{align*}
 can be written using the Heaviside-function as follows;
 \begin{align*}
-	f(t) = t^2 [H(t-1) - H(t-2)]
+	f(t) = t^2 [u(t-1) - u(t-2)]
 \end{align*}
 such that the leftmost part of the expression evaluates to zero if $t \notin (1,\ 2)$.
 \begin{figure}[h!]
@@ -168,7 +168,19 @@ such that the leftmost part of the expression evaluates to zero if $t \notin (1,
 	\includegraphics[scale=3]{../figure_6_3_8.png}
 	\caption{Plot of $f(t)$.}
 \end{figure}
-Oppgave ikke ferdig:)
+\begin{align*}
+	\Laplace\{f\}
+	&= \Laplace\{t^2[u(t-1) - u(t-2)]\} \\
+	&= \Laplace\{[(t-1)^2+2(t-1)+1]u(t-1)\} - \Laplace\{[(t-2)^2 + 4(t-2) + 4]u(t-1)\} \\
+	&= \Laplace\{(t-1)^2u(t-1)\}
+		+ 2 \Laplace\{(t-1)u(t-1)\}
+		+ \Laplace\{u(t-1)\} \\
+	&\hspace*{1cm} - (\Laplace\{(t-2)^2u(t-2)\}
+	+ 4 \Laplace\{(t-2)u(t-2)\}
+	+ 4 \Laplace\{u(t-2)\}
+	) \\
+	&= \frac{e^{-s}}{s^3} (s^2+2s+2) - \frac{2e^{-2s}}{s^3} (2s^2+2s+1)
+\end{align*}
 
 \section*{6.3.15}
 \begin{align*}
@@ -176,8 +188,8 @@ Oppgave ikke ferdig:)
 	&= \frac{e^{-2s}}{s^6} 
 	= e^{-2s} \cdot \frac{5!}{s^{5+1}} \cdot \frac{1}{5!} \\
 	\rightarrow \Laplace^{-1}\{F\}
-	&= H(t-2) \cdot (t-2)^5 \cdot \frac{1}{120}
-	= \frac{(t-2)^5 H(t-2)}{120}
+	&= u(t-2) \cdot (t-2)^5 \cdot \frac{1}{120}
+	= \frac{(t-2)^5 u(t-2)}{120}
 	\hspace*{.7cm} \text{(from table.)}
 \end{align*}
 
@@ -217,8 +229,8 @@ Hence,
 \begin{align*}
 	y(t) = 
 	\left\{\begin{matrix}
-	2t - 4 \sin t & 0 \leq t < 1 \\ 
-	2 & t \geq 1.
+	2t - 4 \sin t & 0 < t < 1 \\ 
+	2 & t > 1.
 	\end{matrix}\right.
 \end{align*}
 
