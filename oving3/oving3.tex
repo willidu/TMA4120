@@ -1,0 +1,247 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+\usepackage{siunitx}
+	\sisetup{exponent-product = \cdot}
+ 	\sisetup{separate-uncertainty = true}
+\usepackage{booktabs}
+\usepackage[font=small,labelfont=bf]{caption}
+\usepackage{enumitem}
+
+\usepackage[scr]{rsfso}
+\newcommand{\Laplace}{\mathcal{L}}
+
+\begin{document}
+
+\title{TMA4120 - Assignment 3} 
+\author{William Dugan}
+
+\maketitle
+
+\section*{11.1.2}
+\begin{itemize}[leftmargin=4.0cm,labelsep=0.5cm]
+    \item[$\cos(nx)$] $p=2\pi/n$
+    \item[$\sin(nx)$] $p=2\pi/n$
+    \item[$\cos(2\pi x / k)$] $p=k$
+    \item[$\sin(2\pi x / k)$] $p=k$
+    \item[$\cos(2\pi nx / k)$] $p=k/n$
+    \item[$\sin(2\pi nx / k)$] $p=k/n$
+\end{itemize}
+
+\section*{11.1.15}
+\begin{align*}
+    f(x) &= x^2,\ 0<x<2\pi,\ f(x+2\pi) = f(x)\\
+    a_0 &= \frac{1}{2\pi} \int_0^{2\pi}x^2dx = \frac{4\pi^3}{3} \\
+    a_n &= \frac{1}{\pi} \int_0^{2\pi} x^2\cos(nx) dx \\
+    &= \frac{1}{\pi} \left[
+        \frac{2}{n^2}x\cos(nx) - \frac{2-(nx)^2}{n^3}\sin(nx)
+    \right]_0^{2\pi} \\
+    &= \frac{4}{n^2} \\
+    b_n &= \frac{1}{\pi} \int_0^{2\pi} x^2\sin(nx)dx \\
+    &= \frac{1}{\pi} \left[
+        \frac{2}{n^2}x\sin(nx) + \frac{2-(nx)^2}{n^3}\cos(nx)
+    \right]_0^{2\pi} \\
+    &= - \frac{4\pi}{n} \\
+    \rightarrow S_f 
+    &= 4 \left[
+        \frac{{\pi^2}}{3} + \sum_{n=1}^\infty \left(
+            \frac{\cos(nx)}{n^2} - \frac{\pi\sin(nx)}{n}
+        \right)
+    \right]
+\end{align*}
+
+\section*{11.1.17}
+\begin{align*}
+    f(x) &=
+        \left\{\begin{matrix}
+        \pi+x, &-\pi<x<0 \\ 
+        \pi-x, &0<x<\pi 
+        \end{matrix}\right.
+\end{align*}
+Since $f$ is an even function, $b_n = 0.$
+\begin{align*}
+    a_0 &= \frac{1}{\pi} \int_0^\pi (\pi-x)dx = \frac{\pi}{2} \\
+    a_n &= \frac{2}{\pi} \int_0^\pi (\pi-x)\cos(nx)dx \\
+    &= \frac{2}{\pi} \left[
+        (\pi-x)\frac{1}{n}\sin(nx) - \frac{1}{n^2}\cos(nx)
+    \right]_0^\pi \\
+    &= \frac{2}{\pi n^2} (1-\cos(n\pi)) = \frac{2(1-(-1)^n)}{\pi n^2} \\
+    \rightarrow S_f 
+    &= \frac{\pi}{2} + \sum_{n=1}^\infty \frac{2(1-(-1)^n)}{\pi n^2} \cos(nx)
+\end{align*} 
+
+\section*{11.1.21}
+\begin{align*}
+    f(x) &=
+        \left\{\begin{matrix}
+        -(\pi+x), &-\pi<x<0 \\ 
+        \pi-x, &0<x<\pi 
+        \end{matrix}\right.
+\end{align*}
+Since $f$ is odd, $a_0,\ a_n = 0$.
+\begin{align*}
+    b_n &= \frac{2}{\pi} \int_0^\pi (\pi-x)\sin(nx)dx \\
+    &= \frac{2}{\pi} \left[
+        -\frac{\pi-x}{n}\cos(nx) - \frac{1}{n^2}\sin(nx)
+    \right]_0^\pi \\
+    &= \frac{2}{n} \\
+    \rightarrow S_f 
+    &= \sum_{n=1}^\infty \frac{2}{n}\sin(nx)
+\end{align*}
+
+\section*{11.2.1}
+\begin{itemize}[leftmargin=4.0cm,labelsep=0.5cm]
+    \item[$e^x$] Neither even nor odd.
+    \item[$e^{-|x|}$] Even since $e^{-|-x|}$ = $e^{-|x|}$.
+    \item[$x^3\cos(nx)$] Odd since $x^3$ is odd and $\cos x$ is even.
+    \item[$x^2\tan(\pi x)$] Odd since $x^2$ is even and $\tan x$ is odd.
+    \item[$\sinh x - \cosh x$] Expands to $e^{-z}$ which is neither odd nor even.
+\end{itemize}
+
+\section*{11.2.10}
+\begin{align*}
+    f(x) &=
+        \left\{\begin{matrix}
+        -(4+x), &-4<x<0 \\ 
+        4-x, &0<x<4 
+        \end{matrix}\right.
+\end{align*}
+Since $f$ is odd, $a_0,\ a_n = 0$. Using $a = n\pi/4$ we get
+\begin{align*}
+    b_n &= \frac{1}{2} \int_0^4 (4-x)\sin(ax)dx \\
+    &= \frac{1}{2} \left[
+        - \frac{4-x}{a}\cos(ax) - \frac{1}{a^2}\sin(ax)
+    \right]_0^4 \\
+    &= \frac{2}{a} = \frac{8}{n\pi} \\
+    \rightarrow S_f
+    &= \sum_{n=1}^\infty \frac{8}{n\pi}\sin\left(\frac{n\pi x}{4}\right)
+\end{align*}
+
+\section*{11.2.17}
+\begin{align*}
+    f(x) &=
+        \left\{\begin{matrix}
+        1+x, &-1<x<0 \\ 
+        1-x, &0<x<1 
+        \end{matrix}\right.
+\end{align*}
+Since $f$ is even, $b_n = 0$.
+\begin{align*}
+    a_0 &= \int_0^1 (1-x)dx = \frac{1}{2} \\
+    a_n &= 2\int_0^1 (1-x)\sin(n\pi x)dx \\
+    &= 2 \left[
+        \frac{1-x}{n\pi}\sin(n\pi x) - \frac{1}{(n\pi)^2}\cos(n\pi x)
+    \right]_0^1 \\
+    &= \frac{2(1-(-1)^n)}{(n\pi)^2} \\
+    \rightarrow S_f
+    &= \frac{1}{2} + \sum_{n=1}^\infty \frac{2(1-(-1)^n)}{(n\pi)^2} \cos(n\pi x)
+\end{align*}
+
+\newpage
+\section*{11.2.24}
+\begin{align*}
+    f(x) &=
+        \left\{\begin{matrix}
+        0, &0<x<2 \\ 
+        1, &2<x<4 
+        \end{matrix}\right.
+\end{align*}
+We assume $f$ is periodic with $L = 4$.
+\subsection*{a) Even extension}
+\begin{align*}
+    a_0 &= \frac{1}{4} \int_0^4 f(x)dx = \frac{1}{2} \\
+    a_n &= \frac{1}{2} \int_0^4 f(x)\cos\left(\frac{n\pi x}{4}\right)dx \\
+    &= \frac{1}{2} \left[
+        \frac{4}{n\pi}\sin\left(\frac{n\pi x}{4}\right)
+    \right]_2^4 \\
+    &= \frac{2}{n\pi}\sin\left(\frac{n\pi}{2}\right) \\
+    \rightarrow S_{f_1}
+    &= \frac{1}{2} + \frac{2}{\pi}\sum_{n=1}^\infty \frac{
+        \sin\left(\frac{n\pi}{2}\right) \cos\left(\frac{n\pi x}{4}\right)
+    }{n}
+\end{align*}
+
+\subsection*{b) Odd extension}
+\begin{align*}
+    b_n &= \frac{1}{2} \int_2^4 \sin\left(\frac{n\pi x}{4}\right)dx \\
+    &= - \frac{2}{n\pi} [\cos\left(\frac{n\pi x}{4}\right)]_2^4 \\
+    &= - \frac{2 ((-1)^n - \cos\left(\frac{n\pi}{2}\right))}{n\pi} \\
+    \rightarrow S_{f_2}
+    &= - \frac{2}{\pi}\sum_{n=1}^\infty \frac{(-1)^n - \cos\left(\frac{n\pi}{2}\right)}{n} \sin\left(\frac{n\pi x }{4}\right)
+\end{align*}
+
+\newpage
+\section*{11.2.29}
+\begin{align*}
+    f(x) &= \sin x,\ 0<x<\pi
+\end{align*}
+We assume $f$ is periodic with $L = \pi$.
+\subsection*{a) Even extension}
+\begin{align*}
+    a_0 &= \frac{1}{\pi} \int_0^\pi \sin x dx = \frac{2}{\pi} \\
+    a_n &= \frac{2}{\pi} \int_0^\pi \sin x \cos(nx)dx \\
+    &= \frac{2}{\pi} \cdot \frac{1}{1-1/n^2}\left[
+        -\frac{1}{n} \sin x \sin(nx) + \frac{1}{n^2}\cos x \cos(nx)
+    \right]_0^\pi \\
+    &= \frac{2((-1)^{n+1} -1)}{\pi(n^2-1)} \\
+    \rightarrow S_{f_1} 
+    &= \frac{2}{\pi} \left(
+        1 + \sum_{n=1}^\infty \frac{(-1)^{n+1} -1}{n^2-1} \sin(nx)
+    \right)
+\end{align*}
+
+\subsection*{b) Odd extension}
+\begin{align*}
+    b_n &= \frac{2}{\pi} \int_0^\pi \sin x \sin(nx) dx \\
+    &= \frac{2}{\pi} \cdot \frac{n^2}{n^2-1} \left[
+        -\frac{1}{n}\sin x \cos(nx) - \frac{1}{n^2}\cos x \sin(nx)
+    \right]_0^\pi \\
+    &= 0\ (n \neq 1)
+\end{align*}
+To avoid dividing by zero we calculate $b_1$ separately.
+\begin{align*}
+    b_1 &= \frac{2}{\pi} \int_0^\pi \sin^2 x dx 
+    = \frac{1}{\pi} \int_0^\pi (1-\cos(2x))dx
+    = 1 \\
+    \rightarrow S_{f_2} 
+    &= \sin x
+\end{align*}
+
+\section*{11.3.15}
+\begin{align*}
+    r(t) &= t(\pi^2 - t^2),\ -\pi<x<\pi
+\end{align*}
+Since $r(-t)=-r(t)$ we get a Fourier sine series $(a_0, a_n = 0)$.
+\begin{align*}
+    b_n &= \frac{2}{\pi} \int_{-\pi}^\pi (\pi^2 t-t^3)\sin(nx)dx = \frac{12(-1)^{n+1}}{n^3}
+\end{align*}
+We can write $y = y_1 + y_2 + \dots$ which yields 
+\begin{align*}
+    y_n''+cy_n'+y &= \frac{12(-1)^{n+1}}{n^3} \sin(nt) \\
+    (-n^2A_n + cnB_n + A_n)\cos(nt) + (-n^2B_n-cnA_n+B_n)\sin(nt) &= \frac{12(-1)^{n+1}}{n^3} \sin(nt) \\
+\end{align*}
+Rewritten:
+\begin{align*}
+    \implies -n^2A_n + cnB_n + A_n &= 0
+    \implies B_n = \frac{A_n(n^2-1)}{cn} \\
+    \implies -n^2B_n-cnA_n+B_n &= -n^2 \frac{A_n(n^2-1)}{cn} - cnA_n + \frac{A_n(n^2-1)}{cn} \\
+    &= A_n \left[
+        \frac{-n^2(n^2-1)-(cn)^2+(n^2-1)}{n}
+    \right] \\
+    &= A_n \left[
+        \frac{(n^2-1)(1-n^2)-(cn)^2}{cn}
+    \right] \\
+    &\left(= \frac{12(-1)^{n+1}}{n^3} \right) \\
+    \implies A_n &= \frac
+        {12(-1)^{n+1}c}
+        {n^2[(n^2-1)(1-n^2)-(cn)^2]} \\
+    B_n &= \frac
+        {12(-1)^{n+1}(n^2-1)}
+        {n^3[(n^2-1)(1-n^2)-(cn)^2]}
+\end{align*}
+
+
+\end{document}
