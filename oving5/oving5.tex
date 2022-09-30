@@ -1,0 +1,164 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+\usepackage{siunitx}
+	\sisetup{exponent-product = \cdot}
+ 	\sisetup{separate-uncertainty = true}
+\usepackage{booktabs}
+\usepackage[font=small,labelfont=bf]{caption}
+\usepackage{enumitem}
+
+\usepackage[scr]{rsfso}
+\newcommand{\Laplace}{\mathcal{L}}
+
+\begin{document}
+
+\title{TMA4120 - Assignment 5} 
+\author{William Dugan}
+
+\maketitle
+
+\section*{12.1.14.d}
+\subsection*{i)}
+\begin{align*}
+    &u = v(x) + w(y) & u_{xy} = 0 \\
+    u_{xy} &= \frac{\partial^2}{\partial x \partial y} (v(x) + w(y)) \\
+    &= \frac{\partial}{\partial x} \frac{\partial w(y)}{\partial y} \\
+    &= 0
+\end{align*}
+
+\subsection*{ii)}
+\begin{align*}
+    & u = v(x)w(y) & u u_{xy} = u_x u_y \\
+    u u_{xy} &= u \frac{\partial^2}{\partial x \partial y} (vw) \\
+    &= u \frac{\partial}{\partial x} \left(v \frac{\partial w}{\partial y}\right) \\
+    &= vw \left(\frac{\partial v}{\partial x} \frac{\partial w}{\partial y} \right) \\
+    &= u_x u_y
+\end{align*}
+
+\subsection*{iii)}
+\begin{align*}
+    & u = v(x+2t) + w(x-2t) & u_{tt} = 4 u_{xx} \\
+    u_{tt} &= \frac{\partial^2}{\partial t^2} u \\
+    &= 2 \frac{\partial v}{\partial t} - 2 \frac{\partial w}{\partial t} \\
+    &= 4 \frac{\partial^2 v}{\partial t^2} + 4 \frac{\partial^2 w}{\partial t^2} \\
+    u_{xx} &= \frac{\partial^2 v}{\partial x^2} + \frac{\partial^2 w}{\partial x^2}
+\end{align*}
+
+\section*{12.1.15}
+\begin{align*}
+    & u(x, y) = a \ln (x^2+y^2) + b \\
+    & u = 110 & x^2+y^2 = 1 \\
+    & u = 0 & x^2+y^2 = 100 \\
+    & u_{xx} + u_{yy} = 0
+\end{align*}
+
+\begin{align*}
+    \frac{\partial^2 u}{\partial x^2}
+    &= \frac{\partial}{\partial x} \left(\frac{2ax}{(x^2+y^2)}\right)
+    = \frac{2a}{x^2+y^2} - \frac{4ax^2}{(x^2+y^2)^2} \\
+    \frac{\partial^2 u}{\partial y^2} &= \frac{2a}{x^2+y^2} - \frac{4ay^2}{(x^2+y^2)^2} \\
+    \rightarrow u_{xx} + u_{yy}  &= \frac{4a}{x^2+y^2} - \frac{4a(x^2+y^2)}{(x^2+y^2)^2} = 0
+\end{align*}
+
+\begin{align*}
+    x^2+y^2 = 1 \rightarrow a \ln 1 + b = 110 \rightarrow b &= 110 \\
+    x^2+y^2 = 100 \rightarrow a \ln 100 + 110 = 0 \rightarrow a &= - \frac{110}{\ln 100}
+\end{align*}
+
+\newpage
+
+\section*{12.3.5}
+\begin{align*}
+    & u_{tt} = c^2 u_{xx} \\
+    & u(x, 0) = k \sin 3\pi x \\
+    & u_t (x, 0) = 0 \\
+    & L = 1,\ c^2 = 1,\ k = 0.01
+\end{align*}
+Since $u_t(x,0) = g(x) = 0,\ B_n^* = 0$.
+\begin{align*}
+    B_n &= 2 \int_0^1 k \sin 3\pi x \sin n\pi x dx = 0\ \forall\ n \in \mathbb{N}\textbackslash\{3\} \\
+    B_3 &= 2k\int_0^1 \sin^2 3\pi x dx \\
+    &= k\int_0^1 (1-\cos 6\pi x) dx \\
+    &= k
+\end{align*}
+Where we have used the otrhonormal properties of the trigonometric basis.
+\begin{align*}
+    u(x, t) = k \cos 3\pi t \sin 3\pi x
+\end{align*}
+
+\section*{12.3.7}
+\begin{align*}
+    f(x) = kx(1-x)
+\end{align*}
+$B_n^*$ is zero as in 12.3.5.
+\begin{align*}
+    B_n &= 2k \int_0^1 (x-x^2) \sin n\pi x dx \\
+    &= 2k \left(-\frac{2}{n^3\pi^3}(\cos n\pi - 1) \right) \\
+    &= k \left(\frac{2}{n\pi}\right)^3 & n\ \text{odd}
+\end{align*}
+
+\begin{align*}
+    u(x, t) &= \sum_{n=1,\ \text{odd}}^\infty 
+        \left( \frac{2}{n\pi} \right)^3
+        \cos n\pi t
+        \sin n\pi t
+\end{align*}
+
+\newpage
+
+\section*{12.3.14}
+\begin{align*}
+    & L = \pi & c^2 = 1 \\
+    & u_t(x, 0) = 0.01x & x \in [0, \pi/2] \\
+    & u_t(x, 0) = 0.01(\pi - x) & x \in [\pi/2, \pi] \\
+    & f(x) = 0 \rightarrow B_n = 0.
+\end{align*}
+
+\begin{align*}
+    B_n^* &= \frac{2}{n\pi} \int_0^\pi g(x)\sin nx dx \\
+    &= \frac{2}{n\pi} \left[
+        \int_0^{\pi/2} 0.01x\sin nx dx
+        + \int_{\pi/2}^\pi 0.01(\pi-x)\sin nx dx
+    \right] \\ 
+    &= \frac{0.02}{n\pi}\left(\frac{2\sin n\pi/2}{n^2}\right) \\
+    &= -\frac{0.04}{n^3\pi} & n\ \text{odd}
+\end{align*}
+
+\begin{align*}
+    u(x, t) &= \sum_{n=1,\ odd}^\infty 
+        - \frac{0.04}{n^3\pi} \sin nt \sin nx
+\end{align*}
+
+\section*{12.3.15}
+\begin{align*}
+    &u(x, t) = F(x)G(t) \\
+    &\frac{\partial^2 u}{\partial t^2} = F \cdot G'' \\
+    &\frac{\partial^4 u}{\partial x^4} = F^{(4)} \cdot G
+\end{align*}
+From $u_{tt}=-c^2u_{x^4}$ we get $FG'' = -c^2 F^{(4)}G$. Rearraning we get
+$\frac{G''}{-c^2G} = \frac{F^{(4)}}{F}$ which has to be constant since F and G are 
+functions of different variables. Since $F^{(n)} = (-1)^n\beta^n F$ for n in 
+$2^m$ (cyclic derivation), we get $F^{(4)}/F = \beta^4$. Similar reasoning can be used
+on G to get $-G''/c^2G = \beta^4$.
+
+\newpage
+
+\section*{12.Rev.18}
+\begin{align*}
+    & u_{xx} + u_x = 0 & (1)\\
+    & u(0, y) = f(y) \\
+    & u_x(0, y) = g(y)
+\end{align*}
+\begin{align*}
+    (1) \rightarrow \Laplace\{u_xx\} + \Laplace\{u_x\} &= 0 \\
+    s^2U - sf(y) - g(y) + sU - f(y) &= 0 \\
+    \rightarrow U = \frac{f \cdot (s+1) + g}{s(s+1)} 
+    &= \frac{f}{s} + g\left(\frac{1}{s} - \frac{1}{s+1}\right) \\
+    \rightarrow u(x, y) &= f(y) + (1+e^{-x})g(y)
+\end{align*}
+
+\end{document}
